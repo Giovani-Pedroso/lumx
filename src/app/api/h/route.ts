@@ -1,4 +1,5 @@
 import prisma from "@/utils/db";
+import { getUser } from "@/utils/getUser";
 import bcrypt from "bcrypt";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest } from "next/server";
@@ -10,6 +11,7 @@ type ResponseData = {
 export async function GET(req: NextRequest) {
   console.log(req.nextUrl);
   console.log("executando");
+  getUser("1@email.com", "123455");
   return Response.json({ mess: "ok" });
 }
 

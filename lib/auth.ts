@@ -1,14 +1,17 @@
 import { NextAuthOptions, User, getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import bcrypt from "bcrypt";
 
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
-
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/utils/db";
 import { cache } from "react";
 
 export const authConfig: NextAuthOptions = {
+  adaper: PrismaAdapter(prisma),
+
   providers: [
     CredentialsProvider({
       name: "Sign in",
@@ -21,20 +24,34 @@ export const authConfig: NextAuthOptions = {
         password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials || !credentials.password || !credentials.email) {
-          console.log("no credentials");
-          return null;
-        }
-        const dbUser = await prisma.user.findFirst({
-          where: { email: credentials.email },
-        });
-        console.log("user", dbUser);
+        try {
+          if (!credentials || !credentials.password || !credentials.email) {
+            console.log("no credentials");
+            return null;
+          }
+          // console.log(credentials);
 
-        if (dbUser && dbUser.password === credentials.password) {
-          const { password, createAt, id, ...dbUserWithouPassword } = dbUser;
-          return dbUserWithouPassword;
+          const dbUser = await prisma.user.findFirst({
+            where: { email: credentials.email },
+          });
+
+          if (!dbUser) return null;
+
+          // console.log("user", dbUser);
+          const isPasswordCorrect = await bcrypt.compare(
+            credentials.password,
+            dbUser.hash_password,
+          );
+
+          if (dbUser && isPasswordCorrect) {
+            const { password, createAt, id, ...dbUserWithouPassword } = dbUser;
+            return dbUserWithouPassword;
+          }
+          // console.log("thes password is incorret");
+          return null;
+        } catch (err: any) {
+          console.log(err.message);
         }
-        return null;
       },
     }),
     GithubProvider({

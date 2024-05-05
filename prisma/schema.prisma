@@ -22,8 +22,10 @@ model Wallet {
 // }
 
 model User {
-  id            Int    @id
+  id            String @id
   name          String
-  email         String
+  email         String @unique
   hash_password String
+  // Gambiara, ira converter o json em string
+  wallet        String
 }
