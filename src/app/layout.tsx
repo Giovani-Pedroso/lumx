@@ -20,11 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header clientName="Jaora" valorConta={300.0} />
-        <NavigationButtons />
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

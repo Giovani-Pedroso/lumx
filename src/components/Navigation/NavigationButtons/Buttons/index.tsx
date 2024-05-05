@@ -6,7 +6,7 @@ type Props = {
 };
 function Buttons(props: Props) {
   return (
-    <Link className="bg-buttonsNavBg p-4 rounded-lg mb-8" href={props.href}>
+    <Link className="bg-buttonsNavBg p-4 rounded-lg" href={props.href}>
       {props.namePage}
     </Link>
   );

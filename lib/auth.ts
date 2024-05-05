@@ -59,4 +59,20 @@ export const authConfig: NextAuthOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     }),
   ],
+  callbacks: {
+    async session({ token, session, user }) {
+      console.log("session callbacks", { token, session, user });
+      return session;
+    },
+    async jwt({ token, session, user }) {
+      console.log("jwt callbacks", { token, session, user });
+      return token;
+    },
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt",
+  },
 };
+
+export const getServerAuthSession = () => getServerSession(authConfig); //(6)
