@@ -5,7 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 
 const pages = [
-  { pageName: "Depositar", href: "/" },
+  { pageName: "Depositar", href: "/depositar" },
   { pageName: "Sacar", href: "sacar" },
   { pageName: "Negociar", href: "negociar" },
   { pageName: "Acompanhar carteira", href: "carteira" },
