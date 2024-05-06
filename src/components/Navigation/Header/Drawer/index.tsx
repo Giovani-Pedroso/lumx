@@ -5,11 +5,10 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 
 const pages = [
-  { pageName: "Home", href: "/" },
-  { pageName: "Depositar", href: "depositar" },
-  { pageName: "Transferir", href: "transferir" },
+  { pageName: "Depositar", href: "/" },
+  { pageName: "Sacar", href: "sacar" },
   { pageName: "Negociar", href: "negociar" },
-  { pageName: "Dashboard", href: "dash" },
+  { pageName: "Acompanhar carteira", href: "carteira" },
 ];
 
 function Drawer() {
@@ -40,9 +39,9 @@ function Drawer() {
               <a href={page.href}>{page.pageName}</a>
             </li>
           ))}
-          <li onClick={handleLogout}>
-            <a>Logout</a>
-          </li>
+          {/* <li onClick={handleLogout}> */}
+          {/*   <a>Logout</a> */}
+          {/* </li> */}
         </ul>
       </div>
     </div>

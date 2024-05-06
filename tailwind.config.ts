@@ -11,6 +11,8 @@ const config: Config = {
       colors: {
         headerBg: "#6E05FF",
         buttonsNavBg: "#6E05FF",
+        fundo: "#070723",
+        box: "#35B7B9",
         sectionBg: "#4736e9",
       },
       backgroundImage: {
@@ -24,8 +26,8 @@ const config: Config = {
     themes: [
       {
         mytheme: {
-          primary: "#0073ff",
-          secondary: "#0066b9",
+          primary: "#35B7B9",
+          secondary: "#070723",
           accent: "#00c7cd",
           neutral: "#171d0e",
           "base-100": "#f7fcff",
